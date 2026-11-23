@@ -1,0 +1,20 @@
+dataset images: 12800 (first 12800 of 202599 CelebA images)
+dataloader workers: 4
+batches per epoch: 100
+Starting Training Loop...
+[0/5][0/100]	Loss_D: 1.8134	Loss_G: 2.1164	D(x): 0.3093	D(G(z)): 0.3012 / 0.1568
+[0/5][50/100]	Loss_D: 0.1597	Loss_G: 16.2452	D(x): 0.9245	D(G(z)): 0.0001 / 0.0000
+epoch 1 done in 277.8s
+[1/5][0/100]	Loss_D: 0.0039	Loss_G: 41.3520	D(x): 0.9964	D(G(z)): 0.0000 / 0.0000
+[1/5][50/100]	Loss_D: 0.0047	Loss_G: 40.7841	D(x): 0.9956	D(G(z)): 0.0000 / 0.0000
+epoch 2 done in 241.5s
+[2/5][0/100]	Loss_D: 0.0012	Loss_G: 40.5421	D(x): 0.9989	D(G(z)): 0.0000 / 0.0000
+[2/5][50/100]	Loss_D: 0.0005	Loss_G: 40.3305	D(x): 0.9995	D(G(z)): 0.0000 / 0.0000
+epoch 3 done in 515.7s
+[3/5][0/100]	Loss_D: 0.0001	Loss_G: 40.3957	D(x): 0.9999	D(G(z)): 0.0000 / 0.0000
+[3/5][50/100]	Loss_D: 0.0001	Loss_G: 40.1920	D(x): 0.9999	D(G(z)): 0.0000 / 0.0000
+epoch 4 done in 392.5s
+[4/5][0/100]	Loss_D: 0.0002	Loss_G: 39.9765	D(x): 0.9998	D(G(z)): 0.0000 / 0.0000
+[4/5][50/100]	Loss_D: 0.0000	Loss_G: 39.1484	D(x): 1.0000	D(G(z)): 0.0000 / 0.0000
+epoch 5 done in 416.5s
+finished {"mode": "tutorial", "epochs": 5, "d_updates": 500, "g_updates": 500, "final_loss_d": 0.18312419950962067, "final_loss_g": 5.601184368133545, "mean_loss_d_last_200": 0.11545734623588942, "mean_loss_g_last_50": 33.22919779777527}

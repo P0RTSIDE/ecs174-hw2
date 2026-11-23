@@ -1,0 +1,9 @@
+data/
+**/checkpoint.pt
+*.zip
+make_notebook.py
+dcgan_faces_tutorial.ipynb
+*.aux
+*.log
+*.out
+__pycache__/

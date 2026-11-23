@@ -1,0 +1,10 @@
+{
+  "mode": "tutorial",
+  "epochs": 5,
+  "d_updates": 500,
+  "g_updates": 500,
+  "final_loss_d": 0.18312419950962067,
+  "final_loss_g": 5.601184368133545,
+  "mean_loss_d_last_200": 0.11545734623588942,
+  "mean_loss_g_last_50": 33.22919779777527
+}

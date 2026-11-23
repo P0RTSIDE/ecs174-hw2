@@ -1,0 +1,10 @@
+{
+  "mode": "simple",
+  "epochs": 5,
+  "d_updates": 500,
+  "g_updates": 500,
+  "final_loss_d": 1.3027167320251465,
+  "final_loss_g": 0.7550107836723328,
+  "mean_loss_d_last_200": 1.3203606927394866,
+  "mean_loss_g_last_50": 0.7467646336555481
+}

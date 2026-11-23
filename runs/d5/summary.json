@@ -1,0 +1,10 @@
+{
+  "mode": "d5",
+  "epochs": 5,
+  "d_updates": 500,
+  "g_updates": 100,
+  "final_loss_d": 8.890729077393189e-05,
+  "final_loss_g": 38.929141998291016,
+  "mean_loss_d_last_200": 0.00017077751055893486,
+  "mean_loss_g_last_50": 39.16861450195312
+}
