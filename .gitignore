@@ -7,3 +7,4 @@ dcgan_faces_tutorial.ipynb
 *.log
 *.out
 __pycache__/
+_preview/

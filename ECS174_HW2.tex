@@ -6,6 +6,16 @@
 \setlength{\parskip}{0.45em}
 \setlength{\parindent}{0pt}
 
+\newcommand{\fixedfig}[2]{%
+  \par\vspace{0.4em}%
+  \noindent\begin{minipage}{\textwidth}%
+  \centering
+  #1\par\vspace{0.4em}%
+  {\small #2}%
+  \end{minipage}%
+  \par\vspace{0.9em}%
+}
+
 \title{ECS 174 Homework 2\\Training a DCGAN on CelebA}
 \author{Sol Abrian}
 \date{}
@@ -41,27 +51,17 @@ Epoch & Batch & Loss\(_D\) & Loss\(_G\) & \(D(x)\) & \(D(G(z))\) \\
 
 By the end of epoch 1 the discriminator is already sure: \(D(x)\) is near 1 and \(D(G(z))\) is 0. The generator loss then sits near 40, which is \(-\log D(G(z))\) when the discriminator's score on fakes is numerically zero. There is no useful gradient left for the generator, so the fixed-noise samples stay unstructured through epoch 5.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/tutorial/loss_curve.png}
-\caption{Experiment 1. Generator and discriminator loss.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/tutorial/loss_curve.png}}{Experiment 1. Generator and discriminator loss.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_1.png}
-\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_2.png}
-\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_3.png}
-\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_4.png}
-\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_5.png}
-\caption{Experiment 1. Fixed-noise outputs after epochs 1 through 5.}
-\end{figure}
+\fixedfig{%
+\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_1.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_2.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_3.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_4.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/tutorial/epoch_5.png}%
+}{Experiment 1. Fixed-noise outputs after epochs 1 through 5.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/tutorial/real_vs_fake.png}
-\caption{Experiment 1. Real training images and the final generator samples.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/tutorial/real_vs_fake.png}}{Experiment 1. Real training images and the final generator samples.}
 
 \section{Batch normalization}
 
@@ -103,32 +103,24 @@ Epoch & Batch & Loss\(_D\) & Loss\(_G\) & \(D(x)\) & \(D(G(z))\) \\
 \end{tabular}
 \end{center}
 
+\clearpage
 Giving the discriminator more steps makes the imbalance worse, not better. It is confident by batch 50 of epoch 1, and it stays there. The generator loss ends near 39. The fixed-noise images remain noise. The assignment allows this: the schedule does not have to beat the baseline.
 
 On the loss plot the generator curve is drawn only on the steps where the generator is updated, so it has one fifth as many points as the discriminator curve.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/d5/loss_curve.png}
-\caption{Experiment 2. Generator and discriminator loss. The generator is updated every fifth step.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/d5/loss_curve.png}}{Experiment 2. Generator and discriminator loss. The generator is updated every fifth step.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.18\textwidth]{runs/d5/epoch_1.png}
-\includegraphics[width=0.18\textwidth]{runs/d5/epoch_2.png}
-\includegraphics[width=0.18\textwidth]{runs/d5/epoch_3.png}
-\includegraphics[width=0.18\textwidth]{runs/d5/epoch_4.png}
-\includegraphics[width=0.18\textwidth]{runs/d5/epoch_5.png}
-\caption{Experiment 2. Fixed-noise outputs after epochs 1 through 5.}
-\end{figure}
+\fixedfig{%
+\includegraphics[width=0.18\textwidth]{runs/d5/epoch_1.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/d5/epoch_2.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/d5/epoch_3.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/d5/epoch_4.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/d5/epoch_5.png}%
+}{Experiment 2. Fixed-noise outputs after epochs 1 through 5.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/d5/real_vs_fake.png}
-\caption{Experiment 2. Real training images and the final generator samples.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/d5/real_vs_fake.png}}{Experiment 2. Real training images and the final generator samples.}
 
+\clearpage
 \section{Experiment 3: two-convolution discriminator}
 
 The generator is unchanged and both networks start from new weights. The discriminator is the two-layer network from the assignment. The first convolution maps 3 channels to 64 with stride 2, then batch norm and a leaky ReLU. The second convolution maps 64 channels to 1 with stride 1 and no padding. Adaptive average pooling reduces that map to \(1\times 1\), and a sigmoid turns it into a probability. Training is back to one discriminator step per generator step.
@@ -164,26 +156,16 @@ Epoch & Batch & Loss\(_D\) & Loss\(_G\) & \(D(x)\) & \(D(G(z))\) \\
 
 This discriminator is too weak to separate real images from fakes. \(D(x)\) and \(D(G(z))\) both stay near \(0.5\) for all 5 epochs, so the generator is never pushed to match a face. Its samples pick up a repeated color pattern, not a person. The losses do stay finite and move slowly: discriminator loss ends at 1.30 and generator loss at 0.76. That is a stable failure, unlike the saturated baseline.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/simple/loss_curve.png}
-\caption{Experiment 3. Generator and discriminator loss.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/simple/loss_curve.png}}{Experiment 3. Generator and discriminator loss.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.18\textwidth]{runs/simple/epoch_1.png}
-\includegraphics[width=0.18\textwidth]{runs/simple/epoch_2.png}
-\includegraphics[width=0.18\textwidth]{runs/simple/epoch_3.png}
-\includegraphics[width=0.18\textwidth]{runs/simple/epoch_4.png}
-\includegraphics[width=0.18\textwidth]{runs/simple/epoch_5.png}
-\caption{Experiment 3. Fixed-noise outputs after epochs 1 through 5.}
-\end{figure}
+\fixedfig{%
+\includegraphics[width=0.18\textwidth]{runs/simple/epoch_1.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/simple/epoch_2.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/simple/epoch_3.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/simple/epoch_4.png}\hfill
+\includegraphics[width=0.18\textwidth]{runs/simple/epoch_5.png}%
+}{Experiment 3. Fixed-noise outputs after epochs 1 through 5.}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.92\textwidth]{runs/simple/real_vs_fake.png}
-\caption{Experiment 3. Real training images and the final generator samples.}
-\end{figure}
+\fixedfig{\includegraphics[width=0.88\textwidth]{runs/simple/real_vs_fake.png}}{Experiment 3. Real training images and the final generator samples.}
 
 \end{document}
